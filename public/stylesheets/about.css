@@ -1,0 +1,33 @@
+.wz-page-about{
+    position:relative;
+    margin-left:150px;
+    margin-right:400px;
+    height:auto;
+    margin-top:100px;
+    background-color:#ffffff;
+    padding:50px 50px;
+}
+
+.wz-page-about p{
+    font-size:14px;
+}
+
+.wz-about-get-list{
+    list-style:none;
+    margin-left:20px;
+    margin-top:20px;
+    margin-bottom:40px;
+}
+
+.wz-about-get-list li{
+    font-size:13px;
+    margin-bottom:10px;
+}
+
+.code{
+    background-color:#6aa897;
+    color:#222222;
+    padding:3px 10px;
+    border-radius:3px;
+    font-family:'monaco', 'Consolas', "Liberation Mono", Courier, monospace;
+}

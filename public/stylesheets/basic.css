@@ -1,0 +1,129 @@
+body,div,dl,dt,dd,ul,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,blockquote{
+	margin:0;padding:0;
+	font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+}
+p,span,b,i,a,label{
+	font-family: "Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+}
+
+input{
+	vertical-align: middle;
+}
+
+
+html,body{
+    width:100%;
+    height:100%;
+}
+
+body{
+    position:relative;
+    background-color:#e9eaed;
+}
+
+.wz-page-header{
+    position:fixed;
+    top:0;right:0;
+    box-sizing:border-box;
+    width: 100%;
+    height: 60px;
+    background-color: #6AA897;
+    font-size: 22px;
+    line-height: 60px;
+    padding-left:20px;
+    z-index:102;
+}
+
+.wz-page-nav{
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    box-sizing:border-box;
+    position:fixed;
+    left:0;top:0;
+    width:100px;
+    height:100%;
+    background-color: #6AA897;
+    color:#333333;
+    font-family: "Lato", Helvetica Neue, Helvetica, Arial, sans-serif;
+    padding-top:80px;
+    z-index:101;
+}
+
+.wz-page-nav li{
+    margin-bottom:15px;
+}
+
+.wz-page-nav-item-icon{
+    width:100%;
+    font-size:80px;
+    text-align:center;
+}
+
+.wz-page-nav-item-text{
+    display:block;
+    width:100%;
+    text-align:center;
+    font-weight:bold;
+    margin-top:5px;
+    text-decoration:none;
+    color:#222222;
+}
+
+.wz-page-profile{
+    position:absolute;
+    right:0;top:0;
+    width:320px;
+    height:450px;
+    background-color:#2f4154;
+    margin-right:50px;
+}
+
+.wz-page-profile-header{
+    width:180px;
+    height:180px;
+    -moz-border-radius:90px;
+    -webkit-border-radius:90px;
+    border-radius:90px;
+    margin:0 auto;
+    margin-top:25px;
+    overflow:hidden;
+}
+
+.wz-page-profile-header img{
+    width:100%;
+    height:100%;
+}
+
+.wz-page-profile-info{
+    width:100%;
+    height:auto;
+    text-align:center;
+    color:#ffffff;
+    font-size:13px;
+    margin-top:30px;
+}
+
+.wz-page-profile-info p{
+    margin-bottom:10px;
+}
+
+.wz-page-profile-socially-links{
+    position:relative;
+    width:100%;
+    text-align:center;
+    margin-top:45px;
+}
+
+.wz-page-profile-socially-links-item{
+    display:inline-block;
+    vertical-align:top;
+    width:50px;
+    height:50px;
+    font-size:28px;
+    color:wheat;
+    text-decoration:none;
+}
+
+.wz-page-profile-socially-links-item:hover{
+    color:#6aa897;
+}

@@ -1,0 +1,132 @@
+<%- partial('basic.ejs') %>
+    <link href="/stylesheets/projects.css" rel="stylesheet" type="text/css"/>
+    <%- partial('nav.ejs') %>
+    <div class="wz-page-project" id="page-project-project">
+        <p>项目简介</p>
+        <div class="wz-page-project-summary">
+            <div class="wz-page-project-summary-item">
+                <img src="/images/mic.jpg"/>
+                <div class="wz-page-project-summary-item-over" style="display:none;">
+                    <div style="-webkit-box-flex:1;-moz-box-flex:1;-ms-box-flex:1;box-flex:1;"></div>
+                    <div class="wz-page-project-summary-item-detail">
+                        <div class="wz-page-project-summary-title">项目名：全球风险等级热点图</div>
+                        <div class="wz-page-project-summary-platform">运行平台：内嵌iOS,Android环境</div>
+                        <div class="wz-page-project-summary-program-language">实现语言：JS + HTML5</div>
+                    </div>
+                    <a href="#" class="wz-page-project-summary-show-detail-button" data-project-id="mckinsey">查看详情</a>
+                    <div style="-webkit-box-flex:1;-moz-box-flex:1;-ms-box-flex:1;box-flex:1;"></div>
+                </div>
+            </div>
+            <div class="wz-page-project-summary-item">
+                <img src="/images/hengjing.png"/>
+                <div class="wz-page-project-summary-item-over" style="display:none;">
+                    <div style="-webkit-box-flex:1;-moz-box-flex:1;-ms-box-flex:1;box-flex:1;"></div>
+                    <div class="wz-page-project-summary-item-detail">
+                        <div class="wz-page-project-summary-title">项目名：智能家居控制系统</div>
+                        <div class="wz-page-project-summary-platform">运行平台：浏览器</div>
+                        <div class="wz-page-project-summary-program-language">实现语言：PHP + Node.JS + React.JS</div>
+                    </div>
+                    <a href="#" class="wz-page-project-summary-show-detail-button" data-project-id="hengjing">查看详情</a>
+                    <div style="-webkit-box-flex:1;-moz-box-flex:1;-ms-box-flex:1;box-flex:1;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="wz-page-project-detail">
+            <div class="wz-page-project-detail-item" id="project-mckinsey">
+                <h1 class="wz-page-project-detail-title">全球风险等级热点图</h1>
+                <div class="wz-page-project-detail-desc">
+                    <p>项目创建时间：2014-10-09</p>
+                    <p>使用公司：<a href="http://zh.wikipedia.org/wiki/%E9%BA%A5%E8%82%AF%E9%8C%AB">麦肯锡</a></p>
+                    <p>大致介绍：这是一个基于html5实现的项目，基于HighCharts Map提供的框架制作的。</p>
+                    <p>在HighChart Map的框架上面，我又实现了下面几样功能</p>
+                </div>
+                <ul class="wz-page-project-detail-function-list">
+                    <li>
+                        <p>可以随时的调整各个风险的权值，进而调整整个页面的数据</p>
+                        <img src="/images/mic-01.png" class="wz-page-project-detail-screenprint"/>
+                        <img src="/images/mic-02.png" class="wz-page-project-detail-screenprint"/>
+                    </li>
+                    <li>
+                        <p>可以指定某个国家进行搜索</p>
+                        <img src="/images/mic-03.png" class="wz-page-project-detail-screenprint"/>
+                        <img src="/images/mic-04.png" class="wz-page-project-detail-screenprint"/>
+                    </li>
+                    <li>
+                        <p>根据项目提供的数据，将灾难可视化的显示在界面上</p>
+                        <img src="/images/mic-06.png" class="wz-page-project-detail-screenprint"/>
+                        <img src="/images/mic-07.png" class="wz-page-project-detail-screenprint"/>
+                        <img src="/images/mic-09.png" class="wz-page-project-detail-screenprint"/>
+                        <img src="/images/mic-08.png" class="wz-page-project-detail-screenprint"/>
+                        <img src="/images/mic-10.png" class="wz-page-project-detail-screenprint"/>
+                    </li>
+                </ul>
+            </div>
+            <div class="wz-page-project-detail-item" id="project-hengjing">
+                <h1 class="wz-page-project-detail-title">智能家居控制系统</h1>
+                <div class="wz-page-project-detail-desc">
+                    <p>项目创建时间：2014-06-01</p>
+                    <p>使用公司：恒晶电子科技有限公司</p>
+                    <p>大致介绍：这是一个管理家居系统的网站</p>
+                    <p>网站：http://example.com</p>
+                </div>
+                <ul class="wz-page-project-detail-function-list">
+                    <li>
+                        <p>当然，首先登录注册是不能少的咯！</p>
+                        <img src="/images/hengjing-01.png" class="wz-page-project-detail-screenprint"/>
+                    </li>
+                    <li>
+                        <p>管理界面截图</p>
+                        <img src="/images/hengjing-02.png" class="wz-page-project-detail-screenprint"/>
+                        <img src="/images/hengjing-03.png" class="wz-page-project-detail-screenprint"/>
+                        <img src="/images/hengjing-04.png" class="wz-page-project-detail-screenprint"/>
+                        <img src="/images/hengjing-05.png" class="wz-page-project-detail-screenprint"/>
+                        <img src="/images/hengjing-06.png" class="wz-page-project-detail-screenprint"/>
+                        <img src="/images/hengjing-07.png" class="wz-page-project-detail-screenprint"/>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <%- partial('profile.ejs') %>
+    <script>
+
+        var RESIZE_TIMEOUT = null;
+
+        function autoSizeProjectSummary(){
+
+            clearTimeout(RESIZE_TIMEOUT);
+
+            RESIZE_TIMEOUT = setTimeout(function(){
+
+                var shellWidth = $('#page-project-project').width() - 20;
+                var eachWidth = parseInt(shellWidth / 2);
+                $('.wz-page-project-summary-item').width(eachWidth);
+
+            },200);
+
+        }
+
+        autoSizeProjectSummary();
+
+        $(window).resize(autoSizeProjectSummary);
+
+        $('.wz-page-project-summary-item').on('mouseenter',function(event){
+            event.preventDefault();
+            $(this).find('.wz-page-project-summary-item-over').show();
+        });
+
+        $('.wz-page-project-summary-item').on('mouseleave',function(event){
+            event.preventDefault();
+            $(this).find('.wz-page-project-summary-item-over').hide();
+        });
+
+        $('.wz-page-project-summary-show-detail-button').on('click',function(event){
+            event.preventDefault();
+            var projectId = $(this).attr('data-project-id');
+            $("html,body").animate({ scrollTop: $('#project-' + projectId).offset().top - 80 }, 1000);
+
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+.wz-page-article{
+    position:relative;
+    margin-left:150px;
+    margin-right:400px;
+    height:100%;
+    margin-top:100px;
+}
+
+.wz-article{
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    box-sizing:border-box;
+    width:100%;
+    height:auto;
+    background-color:#ffffff;
+    margin-bottom:50px;
+    padding:20px 30px;
+    border:0;
+}
+
+.wz-article-modify-time{
+    font-size:12px;
+    font-family: "Lato", Helvetica Neue, Helvetica, Arial, sans-serif;
+    color:#999999;
+}
+
+.wz-article-title{
+    font-size:30px;
+    font-family: "Lato", Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-weight:bold;
+    margin-top:5px;
+    margin-bottom:20px;
+    color:#222222;
+}
+
+.wz-article-container{
+
+}

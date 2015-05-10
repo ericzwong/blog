@@ -1,0 +1,101 @@
+<%- partial('basic.ejs') %>
+    <link href="/stylesheets/index.css" rel="stylesheet" type="text/css"/>
+    <%- partial('nav.ejs') %>
+    <div class="wz-page-article" id="page-article-container"></div>
+    <%- partial('profile.ejs') %>
+    <script type="text/jsx">
+
+        function formatTime(modify_time){
+
+            var lastModifyTimeStr = "";
+            var lastModifyTime = new Date(parseInt(modify_time) * 1000);
+            var lastModifyTimeMonth = parseInt(lastModifyTime.getMonth()) + 1 < 10 ? "0" + (parseInt(lastModifyTime.getMonth()) + 1) : parseInt(lastModifyTime.getMonth()) + 1;
+            var lastModifyTimeDay = lastModifyTime.getDate() < 10 ? "0" + lastModifyTime.getDate() : lastModifyTime.getDate();
+            var lastModifyTimeHours = lastModifyTime.getHours() < 10 ? "0" + lastModifyTime.getHours() : lastModifyTime.getHours();
+            var lastModifyTimeMinutes = lastModifyTime.getMinutes() < 10 ? "0" + lastModifyTime.getMinutes() : lastModifyTime.getMinutes();
+
+            return lastModifyTimeStr = lastModifyTime.getFullYear() + "-" + lastModifyTimeMonth + "-" + lastModifyTimeDay;
+
+        }
+
+        var ArticleList = React.createClass({
+
+            getInitialState: function(){
+                return {
+                    data: []
+                }
+            },
+
+            componentDidMount: function(){
+                this.getData();
+            },
+
+            getData: function(){
+
+                    var self = this;
+
+                    $.ajax('/ajax/article/all',{
+
+                        method: 'GET',
+                        timeout: 5000,
+                        dataType: "json"
+
+                    }).complete(function(returnData,textStatus){
+                        if(textStatus === "success"){
+
+                            var articleData = returnData.responseJSON;
+                            if(articleData['msg'] != "OK"){
+                                return WZAlert().show(articleData['msg']);
+                            }
+
+                            return self.setState({data:articleData['data']});
+
+                        }else{
+
+                            WZAlert().show(textStatus);
+                        }
+                    });
+            },
+
+            render: function(){
+
+
+                var articles = this.state.data.map(function(item,index){
+                    return (
+                        <Article title={item['title']} content={item['container']} modifyTime={item['modify_time']}/>
+                    );
+                });
+
+                return (
+                    <div className="wz-page-article-list">
+                        {articles}
+                    </div>
+                );
+            }
+        });
+
+        var Article = React.createClass({
+            render: function(){
+                return (
+                    <div className="simditor simditor-mac wz-article">
+                        <div className="wz-article-modify-time">{formatTime(this.props.modifyTime)}</div>
+                        <div className="wz-article-title">{this.props.title}</div>
+                        <div className="wz-article-container simditor-body" dangerouslySetInnerHTML={{__html: this.props.content}}></div>
+                    </div>
+                );
+            }
+        });
+
+        var WZAlert = function(){
+            return {
+                show: function(reason){
+                    alert(reason);
+                }
+            }
+        };
+
+        React.render(<ArticleList/>,$('#page-article-container')[0]);
+
+    </script>
+</body>
+</html>
