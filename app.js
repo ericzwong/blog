@@ -5,6 +5,7 @@ var favicon = require('serve-favicon');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var partials = require('express-partials');
+var resize = require('./libs/resize');
 
 var app = express();
 
@@ -19,6 +20,7 @@ app.use(partials());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(resize);
 app.use(express.static(path.join(__dirname, 'public')));
 
 require('./routes/index')(app);
