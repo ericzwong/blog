@@ -25,22 +25,29 @@
 
         }
 
+        //分析当前page
+        function getCurrentPage(){
+            //解析当前的URL获得Page
+            var url = window.location.href;
+            var page = 1;
+            var match = [];
+
+            if((match = /\/page\/(\d{1,})$/.exec(url))){
+                page = match[1];
+            }
+
+            return page;
+        }
+
         var ArticleList = React.createClass({
 
             getInitialState: function(){
 
-                //解析当前的URL获得Page
-                var url = window.location.href;
-                var page = 1;
-                var match = [];
 
-                if((match = /\/page\/(\d{1,})$/.exec(url))){
-                    page = match[1];
-                }
 
                 return {
                     data: [],
-                    page: page
+                    page: getCurrentPage()
                 }
             },
 
@@ -112,7 +119,7 @@
                 return (
                     <div className="wz-page-article-list">
                         {articles}
-                        <ArticleNav changePage={this.changePage}/>
+                        <ArticleNav changePage={this.changePage} nextPage={ (parseInt(this.state.page)+1) }/>
                     </div>
                 );
             }
@@ -139,27 +146,36 @@
             },
 
             nextPage: function(event){
+
+                if(!window.history.pushState){
+                    return;
+                }
+
                 event.preventDefault();
 
                 var page = this.props.changePage(true);
-                this.setState({page:page});
                 window.history.pushState({"prevPage":page}, "next page", '/page/'+page);
             },
 
             prevPage: function(event){
+
+                    if(!window.history.pushState){
+                        return;
+                    }
+
                     event.preventDefault();
 
                     var page = this.props.changePage(false);
-                    this.setState({page:page});
                     window.history.pushState({"prevPage":page}, "next page", '/page/'+page);
 
             },
 
             render: function(){
+
                 return (
                     <div className="wz-page-article-nav">
-                        {this.state.page > 1 && <a href="#" className="wz-page-article-nav-button" onClick={this.prevPage}>上一页</a>}
-                        <a href="#" className="wz-page-article-nav-button" onClick={this.nextPage}>下一页</a>
+                        {getCurrentPage() > 1 && <a href={"/page/" + (this.props.nextPage-2) } className="wz-page-article-nav-button" onClick={this.prevPage}>上一页</a>}
+                        <a href={"/page/" + this.props.nextPage } className="wz-page-article-nav-button" onClick={this.nextPage}>下一页</a>
                     </div>
                 );
             }
