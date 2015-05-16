@@ -36,3 +36,17 @@
 .wz-article-container{
 
 }
+
+.wz-page-article-nav{
+    text-align:right;
+    padding-bottom:50px;
+}
+
+.wz-page-article-nav-button{
+    font-size:13px;
+    color:#ffffff;
+    background-color:#6aa897;
+    text-decoration:none;
+    padding:12px 25px;
+    margin-left:40px
+}

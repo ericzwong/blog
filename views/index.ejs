@@ -3,6 +3,13 @@
     <%- partial('nav.ejs') %>
     <div class="wz-page-article" id="page-article-container"></div>
     <%- partial('profile.ejs') %>
+    <script type="text/javascript">
+
+        window.addEventListener('popstate',function(event){
+            $(document).trigger('needLoadPage');
+        },false);
+
+    </script>
     <script type="text/jsx">
 
         function formatTime(modify_time){
@@ -21,20 +28,55 @@
         var ArticleList = React.createClass({
 
             getInitialState: function(){
+
+                //解析当前的URL获得Page
+                var url = window.location.href;
+                var page = 1;
+                var match = [];
+
+                if((match = /\/page\/(\d{1,})$/.exec(url))){
+                    page = match[1];
+                }
+
                 return {
-                    data: []
+                    data: [],
+                    page: page
                 }
             },
 
             componentDidMount: function(){
                 this.getData();
+
+                var self = this;
+                $(document).on('needLoadPage',function(event){
+                    self.changePage(false);
+                });
+            },
+
+            changePage: function(next){
+                var page = parseInt(this.state.page);
+
+                if(next){
+                    page++;
+                }else{
+                    page > 1 ? page-- : 1;
+                }
+
+                this.setState({
+                    page: page
+                },function(){
+                    this.getData();
+                });
+
+                return page;
+
             },
 
             getData: function(){
 
                     var self = this;
-
-                    $.ajax('/ajax/article/all',{
+                    var url = "/ajax/article/all/page/" + this.state.page;
+                    $.ajax(url,{
 
                         method: 'GET',
                         timeout: 5000,
@@ -47,7 +89,8 @@
                             if(articleData['msg'] != "OK"){
                                 return WZAlert().show(articleData['msg']);
                             }
-
+                            //将scrollTop设置为顶部
+                            $(window).scrollTop(0);
                             return self.setState({data:articleData['data']});
 
                         }else{
@@ -69,6 +112,7 @@
                 return (
                     <div className="wz-page-article-list">
                         {articles}
+                        <ArticleNav changePage={this.changePage}/>
                     </div>
                 );
             }
@@ -81,6 +125,41 @@
                         <div className="wz-article-modify-time">{formatTime(this.props.modifyTime)}</div>
                         <div className="wz-article-title">{this.props.title}</div>
                         <div className="wz-article-container simditor-body" dangerouslySetInnerHTML={{__html: this.props.content}}></div>
+                    </div>
+                );
+            }
+        });
+
+        var ArticleNav = React.createClass({
+
+            getInitialState: function(){
+                    return {
+                        page: 1
+                    }
+            },
+
+            nextPage: function(event){
+                event.preventDefault();
+
+                var page = this.props.changePage(true);
+                this.setState({page:page});
+                window.history.pushState({"prevPage":page}, "next page", '/page/'+page);
+            },
+
+            prevPage: function(event){
+                    event.preventDefault();
+
+                    var page = this.props.changePage(false);
+                    this.setState({page:page});
+                    window.history.pushState({"prevPage":page}, "next page", '/page/'+page);
+
+            },
+
+            render: function(){
+                return (
+                    <div className="wz-page-article-nav">
+                        {this.state.page > 1 && <a href="#" className="wz-page-article-nav-button" onClick={this.prevPage}>上一页</a>}
+                        <a href="#" className="wz-page-article-nav-button" onClick={this.nextPage}>下一页</a>
                     </div>
                 );
             }
