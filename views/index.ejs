@@ -1,6 +1,25 @@
 <%- partial('basic.ejs') %>
     <link href="/stylesheets/index.css" rel="stylesheet" type="text/css"/>
     <%- partial('nav.ejs') %>
+        <noscript>
+            <% if(typeof content === "string"){ %>
+                    <%= content %>
+            <% }else{ %>
+                    <% content.forEach(function(item){ %>
+                        <%
+                            now = new Date(parseInt(item['modify_time']) * 1000);
+                            timeString = now.getFullYear() + "-" + (parseInt(now.getMonth())+1) + "-" + now.getDate();
+                        %>
+                        <article>
+                            <time datetime="<%= timeString %>" pubdate="true"><%= timeString %></time>
+                            <%- item['container'] %>
+                        </article>
+                    <% }) %>
+            <% } %>
+            <a href="/page/<%= prevPage %>">上一页</a>
+            <a href="/page/<%= nextPage %>">下一页</a>
+        </noscript>
+
     <div class="wz-page-article" id="page-article-container"></div>
     <%- partial('profile.ejs') %>
     <script type="text/javascript">
