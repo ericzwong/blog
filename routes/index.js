@@ -34,8 +34,6 @@ function getArticle(paramsPage,callback){
 module.exports = function(app){
 
         app.get('/',function(req,res){
-            //res.writeHead(200,{"Content-Type":"text/html"});
-            //res.end(fs.readFileSync(path.join(__dirname,'../views/index.html'),'utf8'));
 
             getArticle(1,function(err,result){
 

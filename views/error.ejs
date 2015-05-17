@@ -1,0 +1,16 @@
+<%- partial('basic.ejs') %>
+    <link href="/stylesheets/error.css" rel="stylesheet" type="text/css"/>
+    <%- partial('nav.ejs') %>
+
+    <div class="wz-page-error" id="page-error">
+        <h1>ERROR <%= errorCode %></h1>
+        <% if(errorCode === 404){ %>
+            <p>骚年，你貌似迷路了，<a href="/">戳这里</a>回家吧！</p>
+        <% }else{ %>
+            <p>我好想出了什么问题！</p>
+        <% } %>
+    </div>
+
+    <%- partial('profile.ejs') %>
+</body>
+</html>
