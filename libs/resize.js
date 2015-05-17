@@ -106,14 +106,26 @@ var makeDir = function(cachePhotoPath){
 
 module.exports = function(req,res,next){
 
-    //并且设置过期时间为半年
-    var now = new Date();
-    var passHalfYearDate = now.getTime() + (1000 * 3600 * 24 * 180);
-    now.setTime(passHalfYearDate);
-    var expiresDate = now.toUTCString();
-
     //匹配图片后缀
     if(req.path.match(/\.(png|jpeg|jpg)$/)){
+
+        //然后获取If-Modified-Since
+        var modifiedTimeString = req.get('If-Modified-Since');
+
+        if(modifiedTimeString){
+            var now = new Date();
+            var modifiedTime = new Date(modifiedTimeString);
+            //如果在半年内没有过期
+            if((modifiedTime.getTime() + (1000 * 3600 * 24 * 180)) > now.getTime()){
+                res.writeHead(304);
+                res.end();
+                return;
+            }
+        }
+
+        var now = new Date();
+        var expiresDate = now.toUTCString();
+
 
         var needResize = true;
         var width = (parseInt(req.query['w']) <= 0 || isNaN(parseInt(req.query['w']))) ? 100 : parseInt(req.query['w']);
@@ -144,8 +156,7 @@ module.exports = function(req,res,next){
             needResize = false;
             res.writeHead(200, {
                                 'Content-Type': contentType,
-                                'Expires': expiresDate,
-                                'Cache-Control': 'max-age=' + 3600 * 24 * 180
+                                'Last-Modified': expiresDate
                                 });
             return res.end(fs.readFileSync(cachePhotoPath));
 
@@ -175,8 +186,7 @@ module.exports = function(req,res,next){
                 }else{
                     res.writeHead(200, {
                                         'Content-Type': contentType,
-                                        "Expires": expiresDate,
-                                        'Cache-Control': 'max-age=' + 3600 * 24 * 180
+                                        'Last-Modified': expiresDate
                                         });
                     return res.end(fs.readFileSync(cachePhotoPath));
                 }
