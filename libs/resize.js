@@ -106,6 +106,12 @@ var makeDir = function(cachePhotoPath){
 
 module.exports = function(req,res,next){
 
+    //并且设置过期时间为半年
+    var now = new Date();
+    var passHalfYearDate = now.getTime() + (1000 * 3600 * 24 * 180);
+    now.setTime(passHalfYearDate);
+    var expiresDate = now.toUTCString();
+
     //匹配图片后缀
     if(req.path.match(/\.(png|jpeg|jpg)$/)){
 
@@ -134,8 +140,13 @@ module.exports = function(req,res,next){
         }).then(function(filePath){
 
             //因为已经是有图片了，所以直接输出
+
             needResize = false;
-            res.writeHead(200, {'Content-Type': contentType});
+            res.writeHead(200, {
+                                'Content-Type': contentType,
+                                'Expires': expiresDate,
+                                'Cache-Control': 'max-age=' + 3600 * 24 * 180
+                                });
             return res.end(fs.readFileSync(cachePhotoPath));
 
         },function(err){
@@ -162,7 +173,11 @@ module.exports = function(req,res,next){
                     console.log(err);
                     console.log("图片处理失败");
                 }else{
-                    res.writeHead(200, {'Content-Type': contentType});
+                    res.writeHead(200, {
+                                        'Content-Type': contentType,
+                                        "Expires": expiresDate,
+                                        'Cache-Control': 'max-age=' + 3600 * 24 * 180
+                                        });
                     return res.end(fs.readFileSync(cachePhotoPath));
                 }
             }).on('error',function(err){
