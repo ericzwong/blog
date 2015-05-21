@@ -45,7 +45,7 @@ module.exports = function(app){
                     content = result;
                 }
 
-                res.render('index',{"content":content,"nextPage": 3,"prevPage":1});
+                res.render('index',{"content":content,"nextPage": 3,"prevPage":1,"title":"文章"});
 
             });
 
@@ -66,7 +66,7 @@ module.exports = function(app){
                     content = result;
                 }
 
-                res.render('index',{"content":content,"nextPage": parseInt(paramsPage) + 1,"prevPage":paramsPage - 1});
+                res.render('index',{"content":content,"nextPage": parseInt(paramsPage) + 1,"prevPage":paramsPage - 1,"title":"文章"});
 
             });
         });

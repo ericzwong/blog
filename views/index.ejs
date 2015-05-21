@@ -1,6 +1,6 @@
-<%- partial('basic.ejs') %>
+<%- include('basic.ejs') %>
     <link href="/stylesheets/index.css" rel="stylesheet" type="text/css"/>
-    <%- partial('nav.ejs') %>
+    <%- include('nav.ejs') %>
         <noscript>
             <% if(typeof content === "string"){ %>
                     <%= content %>
@@ -21,7 +21,7 @@
         </noscript>
 
     <div class="wz-page-article" id="page-article-container"></div>
-    <%- partial('profile.ejs') %>
+    <%- include('profile.ejs') %>
     <script type="text/javascript">
 
         window.addEventListener('popstate',function(event){

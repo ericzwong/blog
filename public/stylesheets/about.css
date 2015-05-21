@@ -31,3 +31,12 @@
     border-radius:3px;
     font-family:'monaco', 'Consolas', "Liberation Mono", Courier, monospace;
 }
+
+.wz-comment{
+    margin-left:150px;
+    margin-right:400px;
+    background-color:#ffffff;
+    padding:20px 50px;
+    margin-top:50px;
+    margin-bottom:50px;
+}

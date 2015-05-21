@@ -1,6 +1,6 @@
-<%- partial('basic.ejs') %>
+<%- include('basic.ejs') %>
     <link href="/stylesheets/error.css" rel="stylesheet" type="text/css"/>
-    <%- partial('nav.ejs') %>
+    <%- include('nav.ejs') %>
 
     <div class="wz-page-error" id="page-error">
         <h1>ERROR <%= errorCode %></h1>
@@ -11,6 +11,6 @@
         <% } %>
     </div>
 
-    <%- partial('profile.ejs') %>
+    <%- include('profile.ejs') %>
 </body>
 </html>

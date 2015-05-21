@@ -1,6 +1,6 @@
-<%- partial('basic.ejs') %>
+<%- include('basic.ejs') %>
     <link href="/stylesheets/projects.css" rel="stylesheet" type="text/css"/>
-    <%- partial('nav.ejs') %>
+    <%- include('nav.ejs') %>
     <div class="wz-page-project" id="page-project-project">
         <p>项目简介</p>
         <div class="wz-page-project-summary">
@@ -87,7 +87,7 @@
             </div>
         </div>
     </div>
-    <%- partial('profile.ejs') %>
+    <%- include('profile.ejs') %>
     <script>
 
         var RESIZE_TIMEOUT = null;
