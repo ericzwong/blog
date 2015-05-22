@@ -60,7 +60,7 @@ function loadDisqus(source, identifier, url, title) {
 
        //append the Disqus embed script to HTML
        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-       dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+       dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
        $('head').append(dsq);
 
     }
