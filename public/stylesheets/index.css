@@ -37,6 +37,28 @@
 
 }
 
+.wz-article-show-comment-button{
+    font-size:14px;
+    text-align: right;
+    cursor: pointer;
+    color:#cccccc;
+}
+
+.wz-article-show-comment-button:hover{
+    color: #6aa897;
+}
+
+.wz-article-comment-box{
+    height:auto;
+    border-top:1px solid #eaedee;
+    margin-top:20px;
+    padding-top:30px;
+}
+
+.wz-article-comment-box a{
+    color: #6aa897;
+}
+
 .wz-page-article-nav{
     text-align:right;
     padding-bottom:50px;

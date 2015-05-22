@@ -131,7 +131,7 @@
 
                 var articles = this.state.data.map(function(item,index){
                     return (
-                        <Article title={item['title']} content={item['container']} modifyTime={item['modify_time']}/>
+                        <Article title={item['title']} content={item['container']} modifyTime={item['modify_time']} articleId={item['article_id']}/>
                     );
                 });
 
@@ -145,13 +145,67 @@
         });
 
         var Article = React.createClass({
+            getInitialState: function(){
+                    return{
+                        showComment: false
+                    }
+            },
+
+            hanleClickShowComment: function(event){
+                    event.preventDefault();
+                    this.setState({showComment: !this.state.showComment});
+            },
+
+            componentDidUpdate: function(){
+                    if(this.state.showComment){
+                        $(this.refs.comment_prompt.getDOMNode()).text("收起评论");
+                    }else{
+                        $(this.refs.comment_prompt.getDOMNode()).text("展开评论");
+                    }
+            },
+
+            hideShowComment: function(){
+                    this.setState({showComment:false});
+            },
+
             render: function(){
+                var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
                 return (
                     <div className="simditor simditor-mac wz-article">
                         <div className="wz-article-modify-time">{formatTime(this.props.modifyTime)}</div>
                         <div className="wz-article-title">{this.props.title}</div>
                         <div className="wz-article-container simditor-body" dangerouslySetInnerHTML={{__html: this.props.content}}></div>
+                        <div className="wz-article-show-comment-button" onClick={this.hanleClickShowComment}><i className="fa fa-comment"></i>&nbsp;<span ref="comment_prompt">展开评论</span></div>
+                        {this.state.showComment && <ArticleComment articleId={this.props.articleId} title={this.props.title} hideShowComment = {this.hideShowComment}/>}
                     </div>
+                );
+            }
+        });
+
+        var ArticleComment = React.createClass({
+
+            componentDidMount: function(){
+
+                var $element = $(this.refs.commentBox.getDOMNode());
+                loadDisqus($element,"ARTICLE_ID_" + this.props.articleId, window.location.href + "#!/article/" + this.props.articleId, this.props.title);
+
+                var self = this;
+                $element.on('disqus_did_remove',function(event){
+                    self.props.hideShowComment();
+                });
+
+                //将Title进行修改
+                $('title').text(this.props.title);
+
+            },
+
+            render: function(){
+                return (
+
+                    <div className="wz-article-comment-box" ref="commentBox" data-article-id={this.props.articleId}>
+
+                    </div>
+
                 );
             }
         });
